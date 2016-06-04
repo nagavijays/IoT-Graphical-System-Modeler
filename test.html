@@ -1,149 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vorto</title>
-    <link rel="stylesheet" href="../../build/aui-css/css/bootstrap.css">
-    <script src="../../build/aui/aui.js"></script>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="bower_components/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="bower_components/metisMenu/dist/metisMenu.min.css"
+	rel="stylesheet">
+<link href="dist/css/sb-admin-2.css" rel="stylesheet">
+<link href="bower_components/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="font/flaticon.css">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+<script src="test_files/js/aui-min.js"></script>
+<title>VORTO Web Modeler</title>
 </head>
 <body>
-    <h1>AlloyUI - Diagram builder</h1>
-    <div id="diagramBuilder"></div>
-    <script>
-    YUI({ filter:'raw' }).use('aui-diagram-builder', function(Y) {
+	<div id="wrapper">
+		<!-- Navigation -->
+		<nav class="navbar navbar-default navbar-static-top" role="navigation"
+			style="margin-bottom: 0">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html">VORTO Web Modeler</a>
+			</div>
+			<ul class="nav navbar-top-links navbar-right">
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#"> <i class="fa fa-bell fa-fw"></i>
+						<i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-alerts">
+						<li><a href="#">
+								<div>
+									<i class="fa fa-comment fa-fw"></i> Notification <span
+										class="pull-right text-muted small">4 minutes ago</span>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<i class="fa fa-envelope fa-fw"></i> Alert 01 <span
+										class="pull-right text-muted small">12 minutes ago</span>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<i class="fa fa-envelope fa-fw"></i> Alert 02 <span
+										class="pull-right text-muted small">13 minutes ago</span>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a class="text-center" href="#"> <strong>See
+									All Notifications</strong> <i class="fa fa-angle-right"></i>
+						</a></li>
+					</ul> <!-- /.dropdown-alerts --></li>
+				<!-- /.dropdown -->
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#"> <i class="fa fa-user fa-fw"></i>
+						<i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-user">
+						<li><a href="#"><i class="fa fa-user fa-fw"></i> User
+								Profile</a></li>
+						<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+						</li>
+						<li class="divider"></li>
+						<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>
+								Login</a></li>
+					</ul> <!-- /.dropdown-user --></li>
+				<!-- /.dropdown -->
+			</ul>
+		</nav>
+		<div class="container">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<i class="glyphicon glyphicon-th-large"></i> Visual Modeling
+						Dashboard
+						<div class="pull-right">
+							<div class="btn-group">
+								<button type="button"
+									class="btn btn-default btn-xs dropdown-toggle"
+									data-toggle="dropdown">
+									Actions <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu pull-right" role="menu">
+									<li><a href="#">Reset</a></li>
+									<li><a href="#">Export</a></li>
+									<li><a href="#">Import</a></li>
+									<li class="divider"></li>
+									<li><a href="#">Save As</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div id="diagram-builder-bb">
+						  <div id="diagram-builder-sn"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-        var availableFields = [
-            {
-                type: 'task',
-                label: 'Task',
-                iconClass: 'diagram-node-task-icon'
-            },
-            {
-                type: 'state',
-                label: 'State',
-                iconClass: 'diagram-node-state-icon'
-            },
-            {
-                type: 'join',
-                label: 'Join',
-                iconClass: 'diagram-node-join-icon'
-            },
-            {
-                type: 'fork',
-                label: 'Fork',
-                iconClass: 'diagram-node-fork-icon'
-            },
+	</div>
+	<!-- /#wrapper -->
+	<script type="text/javascript">
+    YUI().use(
+    		  'aui-diagram-builder',
+    		  function(Y) {
 
-            {
-                type: 'start',
-                label: 'Start',
-                iconClass: 'diagram-node-start-icon'
-            },
-            {
-                type: 'end',
-                label: 'End',
-                iconClass: 'diagram-node-end-icon'
-            },
-            {
-                type: 'condition',
-                label: 'Condition',
-                iconClass: 'diagram-node-condition-icon'
-            }
-        ];
+    		    var availableFields = [
+    		      {
+    		        iconClass: 'diagram-node-task-icon',
+    		        label: 'Task',
+    		        type: 'task'
+    		      },
+    		      {
+    		          iconClass: 'diagram-node-join-icon',
+    		          label: 'Join',
+    		          type: 'join'
+    		        },
+    		    ];
 
-        var diagramBuilder = new Y.DiagramBuilder({
-            availableFields: availableFields,
-            boundingBox: '#diagramBuilder',
-            fields: [
-                {
-                    // transitions: [
-                    //     'Task1',
-                    //     { target: 'Task0' }
-                    // ],
-                    name: 'Start0',
-                    type: 'start',
-                    xy: [10, 10]
-                },
-                {
-                    name: 'Condition0',
-                    type: 'condition',
-                    xy: [100, 100]
-                },
-                {
-                    name: 'State0',
-                    type: 'state',
-                    xy: [250, 100]
-                },
-                {
-                    name: 'Join0',
-                    type: 'join',
-                    xy: [100, 300]
-                },
-                {
-                    name: 'Task0',
-                    type: 'task',
-                    xy: [400, 100]
-                },
-                {
-                    name: 'Fork0',
-                    type: 'fork',
-                    xy: [400, 300]
-                },
-                {
-                    name: 'EndNode0',
-                    type: 'end',
-                    xy: [600, 10]
-                }
-            ]
-        }).render();
+    		    var diagramBuilder = new Y.DiagramBuilder (
+    		      {
+    		        availableFields: availableFields,
+    		        boundingBox: '#diagram-builder-bb',
+    		      
+    		        render: true,
+    		        srcNode: '#diagram-builder-sn'
+    		      }
+    		    );
 
-        diagramBuilder.connectAll([
-            {
-                connector: { name: 'Link0' },
-                source: 'Start0',
-                target: 'Condition0'
-            },
-            {
-                connector: { name: 'Link1' },
-                source: 'Condition0',
-                target: 'State0'
-            },
-            {
-                connector: { name: 'Link2' },
-                source: 'State0',
-                target: 'Join0'
-            },
-            {
-                connector: { name: 'Link3' },
-                source: 'Join0',
-                target: 'Task0'
-            },
-            {
-                connector: { name: 'Link4' },
-                source: 'Task0',
-                target: 'Fork0'
-            },
-            {
-                connector: { name: 'Link5' },
-                source: 'Fork0',
-                target: 'EndNode0'
-            },
-            {
-                connector: { name: 'Link6' },
-                source: 'State0',
-                target: 'EndNode0'
-            }
-        ]);
-
-        // var task = diagramBuilder.addField({
-        //     name: 'Task2',
-        //     type: 'condition'
-        // });
-        // task.addTransition('Task1');
-        // task.connect('Task1');
-
-    });
+    		    diagramBuilder.connectAll(
+    		      [
+    		        {
+    		          connector: {
+    		            name: 'TaskConnector'
+    		          },
+    		          source: 'StartNode',
+    		          target: 'EndNode'
+    		        }
+    		      ]
+    		    );
+    		  }
+    		);
     </script>
+	<!-- jQuery -->
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+	<!-- Metis Menu Plugin JavaScript -->
+	<script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+	<!-- Morris Charts JavaScript -->
+	<script src="bower_components/raphael/raphael-min.js"></script>
+
+	<!-- Custom Theme JavaScript -->
+	<script src="dist/js/sb-admin-2.js"></script>
+
 </body>
+
 </html>
