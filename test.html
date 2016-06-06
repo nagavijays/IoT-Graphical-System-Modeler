@@ -124,7 +124,7 @@
     		  'aui-diagram-builder',
     		  function(Y) {
 
-    		    var availableFields = [
+    		    /* var availableFields = [
     		      {
     		        iconClass: 'diagram-node-task-icon',
     		        label: 'Task',
@@ -135,11 +135,11 @@
     		          label: 'Join',
     		          type: 'join'
     		        },
-    		    ];
+    		    ]; */
 
     		    var diagramBuilder = new Y.DiagramBuilder (
     		      {
-    		        availableFields: availableFields,
+    		        availableFields: json.availableFields,
     		        boundingBox: '#diagram-builder-bb',
     		      
     		        render: true,
@@ -175,6 +175,10 @@
 
 	<!-- Custom Theme JavaScript -->
 	<script src="dist/js/sb-admin-2.js"></script>
+	<script src="data/devices.js"></script>
+	<script type="text/javascript">
+	console.log(json.availableFields);
+	</script>
 
 </body>
 
