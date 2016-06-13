@@ -16,32 +16,55 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
         <title>VORTO Web Modeler</title>
-        <link rel="stylesheet" type="text/css" href="jointjs/joint.min.css">
-        <link rel="stylesheet" type="text/css" href="jointjs/jquery-ui.min.css">
-        <script src="bower_components/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="jointjs/lodash.min.js"></script>
-        <script type="text/javascript" src="jointjs/backbone-min.js"></script>
-        <script type="text/javascript" src="jointjs/joint.min.js"></script>
-        <script type="text/javascript" src="jointjs/jquery-ui.min.js"></script>
-        <script type="text/javascript">
-        function allowDrop(ev) {
-            ev.preventDefault();
-        }
-
-        function drag(ev) {
-            console.log(ev.target.id);
-            
-        }
-
-        function drop(ev) {
-            ev.preventDefault();
-            var data = ev.dataTransfer.getData("text");
-            ev.target.appendChild(document.getElementById(data));
-        }
-        </script>
-        </script>
-       
-        
+        <style type="text/css">
+        	#outer-dropzone {
+			  height: 140px;
+			}
+			
+			#inner-dropzone {
+			  height: 80px;
+			}
+			
+			.dropzone {
+			  background-color: #ccc;
+			  border: dashed 4px transparent;
+			  border-radius: 4px;
+			  margin: 10px auto 30px;
+			  padding: 10px;
+			  width: 80%;
+			  transition: background-color 0.3s;
+			}
+			
+			.drop-active {
+			  border-color: #aaa;
+			}
+			
+			.drop-target {
+			  background-color: #29e;
+			  border-color: #fff;
+			  border-style: solid;
+			}
+			
+			.drag-drop {
+			  display: inline-block;
+			  min-width: 40px;
+			  padding: 2em 0.5em;
+			
+			  color: #fff;
+			  background-color: #29e;
+			  border: solid 2px #fff;
+			
+			  -webkit-transform: translate(0px, 0px);
+			          transform: translate(0px, 0px);
+			
+			  transition: background-color 0.3s;
+			}
+			
+			.drag-drop.can-drop {
+			  color: #000;
+			  background-color: #4e4;
+			}
+        </style>
     </head>
 <body>
     <div id="wrapper">
@@ -141,29 +164,97 @@
                                 <table class='table table-bordered'>
                                   <tbody>
                                     <tr>
-                                      <td><i id="ss" class="glyph-icon flaticon-cable" draggable="true" ondragstart="drag(event)"></i></td>
-                                      <td><i id="ss1" class="glyph-icon flaticon-charger" draggable="true" ondragstart="drag(event)"></i></td>
-                                      <td><i class="glyph-icon flaticon-charger-1" draggable="true" ondragstart="drag(event)"></i></td>
+                                      <td><i class="glyph-icon flaticon-cable"></i></td>
+                                      <td><i class="glyph-icon flaticon-charger"></i></td>
+                                      <td><i class="glyph-icon flaticon-charger-1"></i></td>
                                     </tr>
                                     <tr>
-                                      <td><i class="glyph-icon flaticon-chip" draggable="true"></i></td>
-                                      <td><i class="glyph-icon flaticon-chip-1" draggable="true"></i></td>
-                                      <td><i class="glyph-icon flaticon-charger-2" draggable="true"></i></td>
+                                      <td><i class="glyph-icon flaticon-chip"></i></td>
+                                      <td><i class="glyph-icon flaticon-chip-1"></i></td>
+                                      <td><i class="glyph-icon flaticon-charger-2"></i></td>
                                     </tr>
                                     <tr>
-                                      <td><i class="glyph-icon flaticon-computer" draggable="true"></i></td>
-                                      <td><i class="glyph-icon flaticon-cooler" draggable="true"></i></td>
-                                      <td><i class="glyph-icon flaticon-copy-machine" draggable="true"></i></td>
+                                      <td><i class="glyph-icon flaticon-computer"></i></td>
+                                      <td><i class="glyph-icon flaticon-cooler"></i></td>
+                                      <td><i class="glyph-icon flaticon-copy-machine"></i></td>
                                     </tr>
                                     <tr>
-                                      <td><i class="glyph-icon flaticon-earphones" draggable="true"></i></td>
-                                      <td><i class="glyph-icon flaticon-ethernet" draggable="true"></i></td>
-                                      <td><i class="glyph-icon flaticon-game-console" draggable="true"></i></td>
+                                      <td><i class="glyph-icon flaticon-earphones"></i></td>
+                                      <td><i class="glyph-icon flaticon-ethernet"></i></td>
+                                      <td><i class="glyph-icon flaticon-game-console"></i></td>
                                     </tr>
                                     <tr>
-                                      <td><i class="glyph-icon flaticon-game-console-1" draggable="true"></i></td>
-                                      <td><i class="glyph-icon flaticon-game-controller-1" draggable="true"></i></td>
-                                      <td><i class="glyph-icon flaticon-hdmi" draggable="true"></i></td>
+                                      <td><i class="glyph-icon flaticon-game-console-1"></i></td>
+                                      <td><i class="glyph-icon flaticon-game-controller-1"></i></td>
+                                      <td><i class="glyph-icon flaticon-hdmi"></i></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                            </ul>
+                        </li>
+                        <li>
+                             <a href="#"><i class="glyphicon glyphicon-hdd"></i> Device Category 2 <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                               <table class='table table-bordered'>
+                                  <tbody>
+                                    <tr>
+                                      <td><i class="glyph-icon flaticon-cable"></i></td>
+                                      <td><i class="glyph-icon flaticon-charger"></i></td>
+                                      <td><i class="glyph-icon flaticon-charger-1"></i></td>
+                                    </tr>
+                                    <tr>
+                                      <td><i class="glyph-icon flaticon-chip"></i></td>
+                                      <td><i class="glyph-icon flaticon-chip-1"></i></td>
+                                      <td><i class="glyph-icon flaticon-charger-2"></i></td>
+                                    </tr>
+                                    <tr>
+                                      <td><i class="glyph-icon flaticon-computer"></i></td>
+                                      <td><i class="glyph-icon flaticon-cooler"></i></td>
+                                      <td><i class="glyph-icon flaticon-copy-machine"></i></td>
+                                    </tr>
+                                    <tr>
+                                      <td><i class="glyph-icon flaticon-earphones"></i></td>
+                                      <td><i class="glyph-icon flaticon-ethernet"></i></td>
+                                      <td><i class="glyph-icon flaticon-game-console"></i></td>
+                                    </tr>
+                                    <tr>
+                                      <td><i class="glyph-icon flaticon-game-console-1"></i></td>
+                                      <td><i class="glyph-icon flaticon-game-controller-1"></i></td>
+                                      <td><i class="glyph-icon flaticon-hdmi"></i></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                            </ul>
+                        </li>
+                        <li>
+                             <a href="#"><i class="glyphicon glyphicon-hdd"></i> Device Category 3 <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <table class='table table-bordered'>
+                                  <tbody>
+                                    <tr>
+                                      <td><i class="glyph-icon flaticon-cable"></i></td>
+                                      <td><i class="glyph-icon flaticon-charger"></i></td>
+                                      <td><i class="glyph-icon flaticon-charger-1"></i></td>
+                                    </tr>
+                                    <tr>
+                                      <td><i class="glyph-icon flaticon-chip"></i></td>
+                                      <td><i class="glyph-icon flaticon-chip-1"></i></td>
+                                      <td><i class="glyph-icon flaticon-charger-2"></i></td>
+                                    </tr>
+                                    <tr>
+                                      <td><i class="glyph-icon flaticon-computer"></i></td>
+                                      <td><i class="glyph-icon flaticon-cooler"></i></td>
+                                      <td><i class="glyph-icon flaticon-copy-machine"></i></td>
+                                    </tr>
+                                    <tr>
+                                      <td><i class="glyph-icon flaticon-earphones"></i></td>
+                                      <td><i class="glyph-icon flaticon-ethernet"></i></td>
+                                      <td><i class="glyph-icon flaticon-game-console"></i></td>
+                                    </tr>
+                                    <tr>
+                                      <td><i class="glyph-icon flaticon-game-console-1"></i></td>
+                                      <td><i class="glyph-icon flaticon-game-controller-1"></i></td>
+                                      <td><i class="glyph-icon flaticon-hdmi"></i></td>
                                     </tr>
                                   </tbody>
                                 </table>
@@ -205,8 +296,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="draggable" class="panel-body">
-                            <div id="paperDemo"></div>
+                        <div class="panel-body">
+                            
                         </div>
                     </div>
                 </div>
@@ -217,54 +308,10 @@
         <!-- /#page-wrapper -->
 
     </div>
-    <script type="text/javascript">
-    (function() {
+    <!-- /#wrapper -->
 
-    	var graph = new joint.dia.Graph;
-    	var paper = new joint.dia.Paper({ el: $('#paperDemo'), width: 900, height: 600, gridSize: 1, model: graph });
-
-    	var m1 = new joint.shapes.devs.Model({
-    	    position: { x: 50, y: 50 },
-    	    size: { width: 70, height: 70 },
-    	    inPorts: ['in1','in2'],
-    	    outPorts: ['out','common'],
-    	    attrs: {
-    	        '.label': { text: 'Model', 'ref-x': .4, 'ref-y': .2 },
-    	        rect: { fill: '#2ECC71' },
-    	        '.inPorts circle': { fill: '#16A085' },
-    	        '.outPorts circle': { fill: '#E74C3C' }
-    	    }
-    	});
-    	graph.addCell(m1);
-
-    	var m2 = m1.clone();
-    	m2.translate(300, 0);
-    	graph.addCell(m2);
-
-    	graph.on('change:source change:target', function(link) {
-    	    var sourcePort = link.get('source').port;
-    	    var sourceId = link.get('source').id;
-    	    var targetPort = link.get('target').port;
-    	    var targetId = link.get('target').id;
-
-    	    var m = [
-    	        'The port <b>' + sourcePort,
-    	        '</b> of element with ID <b>' + sourceId,
-    	        '</b> is connected to port <b>' + targetPort,
-    	        '</b> of elemnt with ID <b>' + targetId + '</b>'
-    	    ].join('');
-    	    
-    	    out(m);
-    	});
-
-    	function out(m) {
-    	    $('#paperDemo').html(m);
-    	}
-
-    	}())
-    
-    </script>
-   
+    <!-- jQuery -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -277,17 +324,7 @@
    
     <!-- Custom Theme JavaScript -->
     <script src="dist/js/sb-admin-2.js"></script>
-    <script>
-		  $(function() {
-			
-		    $( "#draggable" ).droppable({
-		      drop: function( event, ui ) {
-		        console.log("dropped");
-		      }
-		    });
-		  });
-		</script>
-
+    <script src="jointjs/interact.min.js"></script>
 </body>
 
 </html>
