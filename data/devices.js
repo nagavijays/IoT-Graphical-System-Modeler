@@ -1,39 +1,12 @@
-var json = 
- {
- "availableFields":[
-	 {
-        iconClass: 'diagram-node-start-icon',
-        label: 'Start',
-        type: 'start'
-      },
-      {
-        iconClass: 'diagram-node-task-icon',
-        label: 'Task',
-        type: 'task'
-      },
-      {
-        iconClass: 'diagram-node-state-icon',
-        label: 'State',
-        type: 'state'
-      },
-      {
-        iconClass: 'diagram-node-join-icon',
-        label: 'Join',
-        type: 'join'
-      },
-      {
-        iconClass: 'diagram-node-fork-icon',
-        label: 'Fork',
-        type: 'fork'
-      },
-      {
-        iconClass: 'diagram-node-condition-icon',
-        label: 'Condition',
-        type: 'condition'
-      },
-      {
-        iconClass: 'diagram-node-end-icon',
-        label: 'End',
-        type: 'end'
-      }
- ]};
+var m5 = new joint.shapes.devs.Model({
+     	    position: { x: 50, y: 50 },
+     	    size: { width: 70, height: 70 },
+     	    inPorts: ['in'],
+     	    outPorts: ['out'],
+     	    attrs: {
+     	        '.label': { text: 'Model', 'ref-x': .4, 'ref-y': .2 },
+     	        rect: { fill: '#2ECC71' },
+     	        '.inPorts circle': { fill: '#16A085' },
+     	        '.outPorts circle': { fill: '#E74C3C' }
+     	    }
+     	});
