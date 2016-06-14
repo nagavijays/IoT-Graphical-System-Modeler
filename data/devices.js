@@ -125,7 +125,7 @@
 	// -----------------------------------------------------------
 
 	var el1 = new joint.shapes.html.Element({ 
-	    position: { x: 600, y: 250 }, 
+	    position: { x: 200, y: 250 }, 
 	    size: { width: 170, height: 100 },
 	    inPorts: ['in','in1'],
 	    outPorts: ['out'],
@@ -133,7 +133,7 @@
 	  });
 
 	var el2 = new joint.shapes.html.Element({ 
-	    position: { x: 600, y: 400 },
+	    position: { x: 200, y: 400 },
 	    size: { width: 170, height: 100 },
 	    inPorts: ['in'],
 	    outPorts: ['out'],
