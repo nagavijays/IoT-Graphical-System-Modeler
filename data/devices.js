@@ -6,7 +6,7 @@
 	        portMarkup: '<g class="port<%= id %>"><circle/></g>',
 	        defaults: joint.util.deepSupplement({
 	            type: 'html.Element',
-	            size: { width: 100, height: 80 },
+	            size: { width: 60, height: 40 },
 	            inPorts: [],
 	            outPorts: [],
 	            attrs: {
@@ -125,17 +125,17 @@
 	// -----------------------------------------------------------
 
 	var el1 = new joint.shapes.html.Element({ 
-	    position: { x: 200, y: 250 }, 
-	    size: { width: 170, height: 100 },
+	    position: { x: 50, y: 250 }, 
+	    size: { width: 60, height: 40 },
 	    inPorts: ['in','in1'],
 	    outPorts: ['out'],
-	    textarea: 'Start writing'
+	    textarea: 'Device'
 	  });
 
 	var el2 = new joint.shapes.html.Element({ 
-	    position: { x: 200, y: 400 },
-	    size: { width: 170, height: 100 },
+	    position: { x: 100, y: 400 },
+	    size: { width: 60, height: 40 },
 	    inPorts: ['in'],
 	    outPorts: ['out'],
-	    textarea: 'Start writing'
+	    textarea: 'Device'
 	  });
