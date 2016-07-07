@@ -34,7 +34,7 @@
             ev.preventDefault();
         }
 
-        function dragleave(ev) {
+        function click_Icon(ev) {
             console.log(ev.target.id);
             var el3 = el1.clone();
         	el3.translate(Math.floor(Math.random() *1000), 0);
@@ -131,7 +131,7 @@
 									<tbody>
 										<tr>
 											<td><i id="ss" class="glyph-icon flaticon-cable"
-												draggable="true" ondragleave="dragleave(event)"></i></td>
+												draggable="true" onclick="click_Icon(event)"></i></td>
 											<td><i class="glyph-icon flaticon-charger"
 												draggable="true" ondragstart="drag(event)"></i></td>
 											<td><i class="glyph-icon flaticon-charger-1"
