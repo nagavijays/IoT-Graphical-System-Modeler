@@ -28,33 +28,48 @@
 <script type="text/javascript" src="jointjs/joint.min.js"></script>
 <script type="text/javascript" src="jointjs/jquery-ui.min.js"></script>
 <script type="text/javascript" src="data/devices.js"></script>
+<script type="text/javascript" src="jointjs/interact.min.js"></script>
 <script type="text/javascript" src="jointjs/export.js"></script>
 <script type="text/javascript">
-        function allowDrop(ev) {
-            ev.preventDefault();
-        }
+//enable draggables to be dropped into this
+interact('.dropzone').dropzone({
+  // only accept elements matching this CSS selector
+  accept: '#yes-drop',
+  // Require a 75% element overlap for a drop to be possible
+  overlap: 0.75,
 
-        function click_Icon(ev) {
-            console.log(ev.target.id);
-            var el3 = el1.clone();
-        	el3.translate(Math.floor(Math.random() *1000), 0);
-        	graph.addCell(el3);
-        	/* var json = graph.toJSON()
-        	console.log(json); */
-        }
-        
+  // listen for drop related events:
+
+  ondropactivate: function (event) {
+    // add active dropzone feedback
+    event.target.classList.add('drop-active');
+  },
+  ondragenter: function (event) {
+    var draggableElement = event.relatedTarget,
+        dropzoneElement = event.target;
+
+    // feedback the possibility of a drop
+    dropzoneElement.classList.add('drop-target');
+    draggableElement.classList.add('can-drop');
+    draggableElement.textContent = 'Dragged in';
+  },
+  ondragleave: function (event) {
+    // remove the drop feedback style
+    event.target.classList.remove('drop-target');
+    event.relatedTarget.classList.remove('can-drop');
+    event.relatedTarget.textContent = 'Dragged out';
+  },
+  ondrop: function (event) {
+    event.relatedTarget.textContent = 'Dropped';
+  },
+  ondropdeactivate: function (event) {
+    // remove active dropzone feedback
+    event.target.classList.remove('drop-active');
+    event.target.classList.remove('drop-target');
+  }
+});
 </script>
-<style type="text/css">
-#device_img{
-	height:42px;
-    width :42px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-right: 5px;
-    padding-left: 5px;
-    
-}
-</style>
+
 </head>
 <body>
 	<div id="wrapper">
@@ -141,7 +156,7 @@
 									<tbody>
 										<tr>
 											<td><i id="ss" class="glyph-icon flaticon-cable"
-												draggable="true" onclick="click_Icon(event)"></i></td>
+												draggable="true" ondragleave="dragleave(event)"></i></td>
 											<td><i class="glyph-icon flaticon-charger"
 												draggable="true" ondragstart="drag(event)"></i></td>
 											<td><i class="glyph-icon flaticon-charger-1"
@@ -179,17 +194,6 @@
 										</tr>
 									</tbody>
 								</table>
-							</ul></li>
-							<li><a href="#"><i class="glyphicon glyphicon-hdd"></i>
-								Device Category 2 <span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<div class="col-lg-3 col-md-4 col-xs-6">
-									<img id="device_img" src="./resources/bulb.png">
-								</div>
-								<div class="col-lg-3 col-md-4 col-xs-6">1</div>
-								<div class="col-lg-3 col-md-4 col-xs-6">1</div>
-								<div class="col-lg-3 col-md-4 col-xs-6">1</div>
-								<div class="col-lg-3 col-md-4 col-xs-6">1</div>
 							</ul></li>
 					</ul>
 				</div>

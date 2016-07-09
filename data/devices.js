@@ -6,7 +6,7 @@
 	        portMarkup: '<g class="port<%= id %>"><circle/></g>',
 	        defaults: joint.util.deepSupplement({
 	            type: 'html.Element',
-	            size: { width: 100, height: 80 },
+	            size: { width: 60, height: 80 },
 	            inPorts: [],
 	            outPorts: [],
 	            attrs: {
@@ -19,6 +19,7 @@
 	                    magnet: true,
 	                    stroke: 'black'
 	                },
+	                
 
 	                '.inPorts circle': { fill: 'green', magnet: 'passive', type: 'input'},
 	                '.outPorts circle': { fill: 'red', type: 'output'}
@@ -45,8 +46,9 @@
 
 	        template: [
 	            '<div class="html-element">',
+	            '<img src="./resources/bulb.png" style="width:50px;height:50px;" >',
 	            '<button class="delete">x</button>',
-	            '<span id="lbl" value="Please write here"></span>',
+	            '<div id="lbl" value="Please write here"></div>',
 	            '</div>'
 	        ].join(''),
 
@@ -111,7 +113,7 @@
 	        var bbox = this.model.getBBox();
 	        // Example of updating the HTML with a data stored in the cell model.
 	        // paper.on('blank:pointerdown', function(evt, x, y) { this.$box.find('textarea').toBack(); });
-	        this.$box.find('span').text(this.model.get('textarea'));
+	        this.$box.find('div').text(this.model.get('textarea'));
 	        this.model.on('cell:pointerclick', function(evt, x, y) { this.$box.find('textarea').toFront(); });
 	        this.$box.css({ width: bbox.width, height: bbox.height, left: bbox.x, top: bbox.y, transform: 'rotate(' + (this.model.get('angle') || 0) + 'deg)' });
 	    },
@@ -125,17 +127,17 @@
 	// -----------------------------------------------------------
 
 	var el1 = new joint.shapes.html.Element({ 
-	    position: { x: 200, y: 250 }, 
-	    size: { width: 170, height: 100 },
+	    position: { x: 50, y: 250 }, 
+	    size: { width: 60, height: 80 },
 	    inPorts: ['in','in1'],
 	    outPorts: ['out'],
-	    textarea: 'Start writing'
+	    textarea: 'Bulb'
 	  });
 
 	var el2 = new joint.shapes.html.Element({ 
-	    position: { x: 200, y: 400 },
-	    size: { width: 170, height: 100 },
+	    position: { x: 100, y: 400 },
+	    size: { width: 60, height: 80 },
 	    inPorts: ['in'],
 	    outPorts: ['out'],
-	    textarea: 'Start writing'
+	    textarea: 'Device'
 	  });
