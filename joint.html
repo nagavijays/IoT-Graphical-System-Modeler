@@ -139,60 +139,30 @@
 						</li>
 						<li><a href="index.html"><i
 								class="glyphicon glyphicon-th-large"></i> IOT Devices </a></li>
-						<li><a href="#"><i class="glyphicon glyphicon-hdd"></i>
+							<li><a href="#"><i class="glyphicon glyphicon-hdd"></i>
 								Device Category 1 <span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<table class='table table-bordered'>
-									<tbody>
-										<tr>
-											<td><i id="ss" class="glyph-icon flaticon-cable"
-												draggable="true" onclick="click_Icon(event)"></i></td>
-											<td><i class="glyph-icon flaticon-charger"
-												draggable="true" ondragstart="drag(event)"></i></td>
-											<td><i class="glyph-icon flaticon-charger-1"
-												draggable="true" ondragstart="drag(event)"></i></td>
-										</tr>
-										<tr>
-											<td><i class="glyph-icon flaticon-chip" draggable="true"></i></td>
-											<td><i class="glyph-icon flaticon-chip-1"
-												draggable="true"></i></td>
-											<td><i class="glyph-icon flaticon-charger-2"
-												draggable="true"></i></td>
-										</tr>
-										<tr>
-											<td><i class="glyph-icon flaticon-computer"
-												draggable="true"></i></td>
-											<td><i class="glyph-icon flaticon-cooler"
-												draggable="true"></i></td>
-											<td><i class="glyph-icon flaticon-copy-machine"
-												draggable="true"></i></td>
-										</tr>
-										<tr>
-											<td><i class="glyph-icon flaticon-earphones"
-												draggable="true"></i></td>
-											<td><i class="glyph-icon flaticon-ethernet"
-												draggable="true"></i></td>
-											<td><i class="glyph-icon flaticon-game-console"
-												draggable="true"></i></td>
-										</tr>
-										<tr>
-											<td><i class="glyph-icon flaticon-game-console-1"
-												draggable="true"></i></td>
-											<td><i class="glyph-icon flaticon-game-controller-1"
-												draggable="true"></i></td>
-											<td><i class="glyph-icon flaticon-hdmi" draggable="true"></i></td>
-										</tr>
-									</tbody>
-								</table>
-							</ul></li>
+								<ul class="nav nav-second-level">
+									<div id="device_cat1">
+									</div>
+								</ul>
+							</li>
 							<li><a href="#"><i class="glyphicon glyphicon-hdd"></i>
 								Device Category 2 <span class="fa arrow"></span></a>
-								<ul id = "device1" class="nav nav-second-level">
-									<div class="col-lg-3 col-md-4 col-xs-6">
-										<img id="device_img" src="./resources/bulb.png">
+								<ul class="nav nav-second-level">
+									<div id="device_cat2">
 									</div>
-									
-								</ul></li>
+								</ul>
+							</li>
+							<li><a href="#"><i class="glyphicon glyphicon-hdd"></i>
+								Device Category 3 <span class="fa arrow"></span></a>
+								<ul class="nav nav-second-level">
+									<div id="device_cat3">
+										<div class="col-lg-3 col-md-4 col-xs-6">
+											<img id="device_img" src="./resources/bulb.png">
+										</div>
+									</div>
+								</ul>
+							</li>
 					</ul>
 				</div>
 				<!-- /.sidebar-collapse -->
@@ -275,7 +245,12 @@
 		        console.log("dropped");
 		      }
 		    });
-		    palate_devices();
+		    
+		    for(var i=0;i<device_catlog.length;i++){
+		    	palate_devices(device_catlog[i].device_category,i);
+		    }
+		    
+		    
 		    
 		  });
 	</script>
