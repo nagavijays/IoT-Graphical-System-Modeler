@@ -114,6 +114,7 @@
 	        // Example of updating the HTML with a data stored in the cell model.
 	        // paper.on('blank:pointerdown', function(evt, x, y) { this.$box.find('textarea').toBack(); });
 	        this.$box.find('div').text(this.model.get('textarea'));
+	        this.$box.find('img').attr('src',this.model.get('img_src'));
 	        this.model.on('cell:pointerclick', function(evt, x, y) { this.$box.find('textarea').toFront(); });
 	        this.$box.css({ width: bbox.width, height: bbox.height, left: bbox.x, top: bbox.y, transform: 'rotate(' + (this.model.get('angle') || 0) + 'deg)' });
 	    },
@@ -131,7 +132,8 @@
 	    size: { width: 60, height: 80 },
 	    inPorts: ['in','in1'],
 	    outPorts: ['out'],
-	    textarea: 'Bulb'
+	    textarea: 'Bulb',
+	    img_src : './resources/humerdity_sensor.png'
 	  });
 
 	var el2 = new joint.shapes.html.Element({ 
@@ -139,5 +141,19 @@
 	    size: { width: 60, height: 80 },
 	    inPorts: ['in'],
 	    outPorts: ['out'],
-	    textarea: 'Device'
+	    textarea: 'Device',
+	    img_src : './resources/humerdity_sensor.png'
 	  });
+	
+	function create_deviceNew(W,H,inport,outport,txt,img,graph) {
+		var el3 = new joint.shapes.html.Element({ 
+		    position: { x: 50, y: 250 }, 
+		    size: { width: W, height: H },
+		    inPorts: ['in','in1'],
+		    outPorts: ['out'],
+		    textarea: txt,
+		    img_src : './resources/'+img
+		  });
+			graph.addCell(el3);
+
+	}
