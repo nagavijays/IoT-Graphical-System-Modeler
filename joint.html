@@ -36,8 +36,8 @@
             ev.preventDefault();
         }
 
-        function click_Icon() {
-            console.log("kkkkkkkkkkkkkkkkkkkkkkkk");
+        function click_Icon(src) {
+            console.log("kkkkkkkkkkkkkkkkkkkkkkkk : "+src);
             var el3 = el1.clone();
         	el3.translate(Math.floor(Math.random() *1000), 0);
         	//graph.addCell(el3);
@@ -52,7 +52,7 @@
         
 </script>
 <style type="text/css">
-#device_img{
+.device_img{
 	height:42px;
     width :42px;
     padding-top: 5px;
@@ -163,7 +163,7 @@
 								<ul class="nav nav-second-level">
 									<div id="device_cat3">
 										<div class="col-lg-3 col-md-4 col-xs-6">
-											<img id="device_img" src="./resources/bulb.png">
+											<img class="device_img" src="./resources/bulb.png">
 										</div>
 									</div>
 								</ul>
@@ -257,9 +257,10 @@
 		    	palate_devices(device_catlog[i].device_category,i);
 		    }
 		    
-		    $("#device_img").click(function(){
-		    	click_Icon();
+		     $(".device_img").click(function(){
+		    	click_Icon(this.src);
 	        });
+		     
 		    
 		    
 		  });
