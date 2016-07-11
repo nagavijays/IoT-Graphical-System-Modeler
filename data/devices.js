@@ -145,14 +145,14 @@
 	    img_src : './resources/humerdity_sensor.png'
 	  });
 	
-	function create_deviceNew(W,H,inport,outport,txt,img,graph) {
+	function create_deviceNew(X,Y,W,H,inport,outport,txt,img,graph) {
 		var el3 = new joint.shapes.html.Element({ 
-		    position: { x: 50, y: 250 }, 
+		    position: { x: X, y: Y }, 
 		    size: { width: W, height: H },
 		    inPorts: inport,
 		    outPorts: outport,
 		    textarea: txt,
-		    img_src : './resources/'+img
+		    img_src : img
 		  });
 			graph.addCell(el3);
 

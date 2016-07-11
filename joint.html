@@ -36,8 +36,8 @@
             ev.preventDefault();
         }
 
-        function click_Icon(src) {
-            console.log("kkkkkkkkkkkkkkkkkkkkkkkk : "+src);
+        function click_Icon(src,title) {
+            //console.log("kkkkkkkkkkkkkkkkkkkkkkkk : "+src);
             var el3 = el1.clone();
         	el3.translate(Math.floor(Math.random() *1000), 0);
         	//graph.addCell(el3);
@@ -45,7 +45,9 @@
         	console.log(json); */
         	var inport = ['in','in1'];
         	var outport = ['out'];
-        	create_deviceNew(60,80,inport,outport,"new device","battery.png",graph);
+        	var X = Math.floor((Math.random() * 800) + 50);
+        	var Y = Math.floor((Math.random() * 300) + 50);
+        	create_deviceNew(X,Y,80,80,inport,outport,title,src,graph);
         }
         
         
@@ -158,16 +160,6 @@
 									</div>
 								</ul>
 							</li>
-							<li><a href="#"><i class="glyphicon glyphicon-hdd"></i>
-								Device Category 3 <span class="fa arrow"></span></a>
-								<ul class="nav nav-second-level">
-									<div id="device_cat3">
-										<div class="col-lg-3 col-md-4 col-xs-6">
-											<img class="device_img" src="./resources/bulb.png">
-										</div>
-									</div>
-								</ul>
-							</li>
 					</ul>
 				</div>
 				<!-- /.sidebar-collapse -->
@@ -258,7 +250,7 @@
 		    }
 		    
 		     $(".device_img").click(function(){
-		    	click_Icon(this.src);
+		    	click_Icon(this.src,this.title);
 	        });
 		     
 		    
