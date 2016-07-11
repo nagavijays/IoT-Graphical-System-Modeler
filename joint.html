@@ -36,14 +36,19 @@
             ev.preventDefault();
         }
 
-        function click_Icon(ev) {
-            console.log(ev.target.id);
+        function click_Icon() {
+            console.log("kkkkkkkkkkkkkkkkkkkkkkkk");
             var el3 = el1.clone();
         	el3.translate(Math.floor(Math.random() *1000), 0);
-        	graph.addCell(el3);
+        	//graph.addCell(el3);
         	/* var json = graph.toJSON()
         	console.log(json); */
+        	var inport = ['in','in1'];
+        	var outport = ['out'];
+        	create_deviceNew(60,80,inport,outport,"new device","battery.png",graph);
         }
+        
+        
         
 </script>
 <style type="text/css">
@@ -224,6 +229,8 @@
 
 	graph.addCells([el1, el2]);
 	
+	
+	
     </script>
 
 
@@ -250,6 +257,9 @@
 		    	palate_devices(device_catlog[i].device_category,i);
 		    }
 		    
+		    $("#device_img").click(function(){
+		    	click_Icon();
+	        });
 		    
 		    
 		  });

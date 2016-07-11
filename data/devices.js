@@ -149,8 +149,8 @@
 		var el3 = new joint.shapes.html.Element({ 
 		    position: { x: 50, y: 250 }, 
 		    size: { width: W, height: H },
-		    inPorts: ['in','in1'],
-		    outPorts: ['out'],
+		    inPorts: inport,
+		    outPorts: outport,
 		    textarea: txt,
 		    img_src : './resources/'+img
 		  });
