@@ -6,6 +6,7 @@ function palate_devices(category,i) {
 		device_img.setAttribute("class","device_img");
 		device_img.setAttribute("src","./resources/"+device_catlog[i].image);
 		device_img.setAttribute("title",device_catlog[i].device);
+		device_img.setAttribute("value",i);
 		nw_elmnt.appendChild(device_img);
 		device_cat.appendChild(nw_elmnt);
 }
