@@ -146,11 +146,22 @@
 	  });
 	
 	function create_deviceNew(X,Y,W,H,inport,outport,txt,img,graph) {
+		var indx,numberOfInputs,numberOfOutputs;
+		for (var i = 0; i < device_catlog.length; i++) {
+			if(device_catlog[i].device == txt){
+				indx = i;
+				break;
+			}
+		}
+		numberOfInputs = device_catlog[indx].inputs;
+		numberOfOutputs = device_catlog[indx].outputs;
+		
+		//console.log("ooooooooooooo : "+indx);
 		var el3 = new joint.shapes.html.Element({ 
 		    position: { x: X, y: Y }, 
 		    size: { width: W, height: H },
-		    inPorts: inport,
-		    outPorts: outport,
+		    inPorts: inputs_ports[numberOfInputs].inputs,
+		    outPorts: outputs_ports[numberOfOutputs].outputs,
 		    textarea: txt,
 		    img_src : img
 		  });
