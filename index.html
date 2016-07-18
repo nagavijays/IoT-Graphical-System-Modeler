@@ -36,8 +36,7 @@
             ev.preventDefault();
         }
 
-        function click_Icon(src,title) {
-            //console.log("kkkkkkkkkkkkkkkkkkkkkkkk : "+src);
+        function click_Icon(src,title,indx) {
             var el3 = el1.clone();
         	el3.translate(Math.floor(Math.random() *1000), 0);
         	//graph.addCell(el3);
@@ -188,7 +187,8 @@
 									</button>
 									<ul class="dropdown-menu pull-right" role="menu">
 										<li><a href="#">Reset</a></li>
-										<li><a onclick="export_graph(graph)">Export</a></li>
+										<li><a onclick="export_graph(graph)">Export Graph</a></li>
+										<li><a onclick="export_sementic(graph)">Export Logic</a></li>
 										<li><a href="#">Import</a></li>
 										<li class="divider"></li>
 										<li><a href="#">Save As</a></li>
@@ -216,10 +216,16 @@
 	        el: $('#paper'),
 	        width: 1500,
 	        height: 700,
-	        model: graph
+	        model: graph,
+	        defaultLink: new joint.dia.Link({
+	            attrs: { '.marker-target': { d: 'M 10 0 L 0 5 L 10 10 z' } },
+	            /* labels: [
+	                     { position: 0.5, attrs: { text: { text: 'label' } } }
+	                 ] */
+	        }),
 	    });
 
-	graph.addCells([el1, el2]);
+	//graph.addCells([el1, el2]);
 	
 	
 	
@@ -250,7 +256,7 @@
 		    }
 		    
 		     $(".device_img").click(function(){
-		    	click_Icon(this.src,this.title);
+		    	click_Icon(this.src,this.title,this.value);
 	        });
 		     
 		    
