@@ -27,3 +27,8 @@ function export_sementic(a) {
 	
 	console.log(exp_grp.cells);
 }
+
+
+function import_graph(graph,result) {
+	graph.fromJSON(JSON.parse(result));
+}

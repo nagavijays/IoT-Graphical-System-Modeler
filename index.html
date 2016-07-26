@@ -223,10 +223,10 @@
 		          <h4 class="modal-title">Import Diagram</h4>
 		        </div>
 		        <div class="modal-body">
-		          <p>Some text in the modal.</p>
+		          <p>Select File : </p>
+		          <input type="file" id="fileInput">
 		        </div>
 		        <div class="modal-footer">
-		          <button type="button" class="btn btn-default" data-dismiss="modal">Import</button>
 		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		        </div>
 		      </div>
@@ -236,7 +236,7 @@
 	
 	
 	<script type="text/javascript">
-
+	
 	 var graph = new joint.dia.Graph;
 
 	    var paper = new joint.dia.Paper({
@@ -251,6 +251,33 @@
 	                 ] */
 	        }),
 	    });
+	    
+		window.onload = function() {
+			var fileInput = document.getElementById('fileInput');
+			var fileDisplayArea ;
+
+			fileInput.addEventListener('change', function(e) {
+				var file = fileInput.files[0];
+				var textType = /text.*/;
+
+				if (file.type.match(textType)) {
+					var reader = new FileReader();
+
+					reader.onload = function(e) {
+						//fileDisplayArea.innerText = reader.result;
+						console.log(reader.result);
+						import_graph(graph,reader.result)
+					}
+
+					reader.readAsText(file);	
+				} else {
+					//fileDisplayArea.innerText = "File not supported!"
+					console.log("File not supported!");
+				}
+			});
+	}
+	    
+	  
 
 	//graph.addCells([el1, el2]);
 	
