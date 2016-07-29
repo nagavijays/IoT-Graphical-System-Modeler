@@ -1,9 +1,7 @@
 function export_graph(a){
         	var myWindow = window.open();
         	myWindow.document.write("<title>Export Graph</title><pre id='jsonExport'>h</pre>");
-        	
         	myWindow.document.getElementById("jsonExport").innerHTML = JSON.stringify(a.toJSON(), undefined, 2);
-        	
         }
 
 function export_sementic(a) {
@@ -26,4 +24,10 @@ function export_sementic(a) {
 	myWindow.document.getElementById("jsonExport").innerHTML = JSON.stringify(exp_grp, undefined, 2);
 	
 	console.log(exp_grp.cells);
+}
+
+
+function import_graph(graph,result) {
+	graph.clear();
+	graph.fromJSON(JSON.parse(result));
 }
