@@ -6,8 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="bower_components/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet">
-<link href="bower_components/metisMenu/dist/metisMenu.min.css"
-	rel="stylesheet">
 <link href="dist/css/sb-admin-2.css" rel="stylesheet">
 <link href="bower_components/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
@@ -19,23 +17,23 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 <title>VORTO Web Modeler</title>
-<link rel="stylesheet" type="text/css" href="jointjs/joint.min.css">
-<link rel="stylesheet" type="text/css" href="jointjs/jquery-ui.min.css">
-<link rel="stylesheet" type="text/css" href="jointjs/jointjsStyle.css">
+<link rel="stylesheet" type="text/css" href="jointjs/library/css/joint.min.css">
+<link rel="stylesheet" type="text/css" href="jointjs/library/css/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="jointjs/library/css/jointjsStyle.css">
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="jointjs/lodash.min.js"></script>
-<script type="text/javascript" src="jointjs/backbone-min.js"></script>
-<script type="text/javascript" src="jointjs/joint.min.js"></script>
-<script type="text/javascript" src="jointjs/jquery-ui.min.js"></script>
-<script type="text/javascript" src="data/devices.js"></script>
+<script type="text/javascript" src="jointjs/library/js/lodash.min.js"></script>
+<script type="text/javascript" src="jointjs/library/js/backbone-min.js"></script>
+<script type="text/javascript" src="jointjs/library/js/joint.min.js"></script>
+<script type="text/javascript" src="jointjs/library/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="devices/devices.js"></script>
 <script type="text/javascript" src="jointjs/export.js"></script>
 <script type="text/javascript" src="resources/device_mapping.js"></script>
 <script type="text/javascript" src="jointjs/palate.js"></script>
+<!-- <script type="text/javascript" src="jointjs/library/js/interact.min.js"></script>-->
 <script type="text/javascript">
         function allowDrop(ev) {
             ev.preventDefault();
         }
-
         function click_Icon(src,title,indx) {
             var el3 = el1.clone();
         	el3.translate(Math.floor(Math.random() *1000), 0);
@@ -47,10 +45,10 @@
         	var X = Math.floor((Math.random() * 800) + 50);
         	var Y = Math.floor((Math.random() * 300) + 50);
         	create_deviceNew(X,Y,80,80,inport,outport,title,src,graph);
-        }
-        
-        
-        
+        } 
+        $( function() {
+          $( "#dialog" ).dialog();
+        } );          
 </script>
 <style type="text/css">
 .device_img{
@@ -129,7 +127,6 @@
 				<!-- /.dropdown -->
 			</ul>
 			<!-- /.navbar-top-links -->
-
 			<div class="navbar-default sidebar" role="navigation">
 				<div class="sidebar-nav navbar-collapse">
 					<ul class="nav" id="side-menu">
@@ -148,7 +145,7 @@
 							<li><a href="#"><i class="glyphicon glyphicon-hdd"></i>
 								Device Category 1 <span class="fa arrow"></span></a>
 								<ul class="nav nav-second-level">
-									<div id="device_cat1">
+									<div id="device_cat1" class="devices">
 									</div>
 								</ul>
 							</li>
@@ -167,7 +164,7 @@
 		</nav>
 
 		<div id="page-wrapper">
-
+			
 			<!-- /.row -->
 			<div class="row">
 				<br></br>
@@ -189,7 +186,7 @@
 										<li><a href="#">Reset</a></li>
 										<li><a onclick="export_graph(graph)">Export Graph</a></li>
 										<li><a onclick="export_sementic(graph)">Export Logic</a></li>
-										<li><a href="#">Import</a></li>
+										<li><a data-toggle="modal" href="#myModal">Import</a></li>
 										<li class="divider"></li>
 										<li><a href="#">Save As</a></li>
 									</ul>
@@ -197,7 +194,8 @@
 							</div>
 						</div>
 						<div class="panel-body">
-							<div id="paper"></div>
+							<div id="paper">
+							</div>
 						</div>
 					</div>
 				</div>
@@ -208,8 +206,32 @@
 		<!-- /#page-wrapper -->
 
 	</div>
+	<div class="container">
+		  <!-- Modal -->
+		  <div class="modal fade" id="myModal" role="dialog">
+		    <div class="modal-dialog">
+		    
+		      <!-- Modal content-->
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title">Import Diagram</h4>
+		        </div>
+		        <div class="modal-body">
+		          <p>Select File : </p>
+		          <input type="file" id="fileInput">
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+	</div>
+	
+	
 	<script type="text/javascript">
-
+	
 	 var graph = new joint.dia.Graph;
 
 	    var paper = new joint.dia.Paper({
@@ -224,9 +246,31 @@
 	                 ] */
 	        }),
 	    });
+	    
+		window.onload = function() {
+			var fileInput = document.getElementById('fileInput');
+			var fileDisplayArea ;
 
-	//graph.addCells([el1, el2]);
-	
+			fileInput.addEventListener('change', function(e) {
+				var file = fileInput.files[0];
+				var textType = /text.*/;
+
+				if (file.type.match(textType)) {
+					var reader = new FileReader();
+
+					reader.onload = function(e) {
+						//fileDisplayArea.innerText = reader.result;
+						console.log(reader.result);
+						import_graph(graph,reader.result)
+					}
+
+					reader.readAsText(file);	
+				} else {
+					//fileDisplayArea.innerText = "File not supported!"
+					console.log("File not supported!");
+				}
+			});
+	}
 	
 	
     </script>
@@ -255,8 +299,11 @@
 		    	palate_devices(device_catlog[i].device_category,i);
 		    }
 		    
-		     $(".device_img").click(function(){
-		    	click_Icon(this.src,this.title,this.value);
+		     $(".device_img").draggable({
+		    	 helper : 'clone',
+		    	 stop:function(event, ui){
+		    		 click_Icon(this.src,this.title,this.value);
+		    	 }
 	        });
 		     
 		    
