@@ -28,5 +28,6 @@ function export_sementic(a) {
 
 
 function import_graph(graph,result) {
+	graph.clear();
 	graph.fromJSON(JSON.parse(result));
 }
