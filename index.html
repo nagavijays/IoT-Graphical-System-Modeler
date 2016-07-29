@@ -29,6 +29,7 @@
 <script type="text/javascript" src="jointjs/export.js"></script>
 <script type="text/javascript" src="resources/device_mapping.js"></script>
 <script type="text/javascript" src="jointjs/palate.js"></script>
+<!-- <script type="text/javascript" src="jointjs/library/js/interact.min.js"></script>-->
 <script type="text/javascript">
         function allowDrop(ev) {
             ev.preventDefault();
@@ -144,7 +145,7 @@
 							<li><a href="#"><i class="glyphicon glyphicon-hdd"></i>
 								Device Category 1 <span class="fa arrow"></span></a>
 								<ul class="nav nav-second-level">
-									<div id="device_cat1">
+									<div id="device_cat1" class="devices">
 									</div>
 								</ul>
 							</li>
@@ -270,11 +271,6 @@
 				}
 			});
 	}
-	    
-	  
-
-	//graph.addCells([el1, el2]);
-	
 	
 	
     </script>
@@ -303,8 +299,11 @@
 		    	palate_devices(device_catlog[i].device_category,i);
 		    }
 		    
-		     $(".device_img").click(function(){
-		    	click_Icon(this.src,this.title,this.value);
+		     $(".device_img").draggable({
+		    	 helper : 'clone',
+		    	 stop:function(event, ui){
+		    		 click_Icon(this.src,this.title,this.value);
+		    	 }
 	        });
 		     
 		    
