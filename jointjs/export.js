@@ -26,8 +26,11 @@ function export_sementic(a) {
 	console.log(exp_grp.cells);
 }
 
-
 function import_graph(graph,result) {
 	graph.clear();
 	graph.fromJSON(JSON.parse(result));
+}
+
+function reset_graph(graph){
+	graph.clear();
 }
