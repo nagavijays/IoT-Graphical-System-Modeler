@@ -14,8 +14,8 @@ var device_catlog = [
 ];
 
 var device_category_arr = [
-   {device_category:1, category_name:"meters"},
-   {device_category:2, category_name:"equty"}
+   {device_category:1, category_name:"Measuring equipments"},
+   {device_category:2, category_name:"Lighting Equipment"}
 ];
 
 var inputs_ports =[
