@@ -3,7 +3,9 @@ Web based IoT Graphical System Modeler
 Date : 19/08/2016
 
 Implemented by - Tharindu Madushanka Peiris
+
 mentor -  Nagavijay Sivakumar
+
 Under the Google summer of code 2016 
 Eclipse foundation 
 
