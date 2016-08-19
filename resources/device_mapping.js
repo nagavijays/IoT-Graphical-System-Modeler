@@ -13,6 +13,11 @@ var device_catlog = [
    {device_category:2, device:"Thired Party Server", image:"thiredpartyServer.png",inputs:1,outputs:1},
 ];
 
+var device_category_arr = [
+   {device_category:1, category_name:"Measuring equipments"},
+   {device_category:2, category_name:"Lighting Equipment"}
+];
+
 var inputs_ports =[
              {inputs:[] },
              {inputs:['in'] },

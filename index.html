@@ -48,7 +48,17 @@
         } 
         $( function() {
           $( "#dialog" ).dialog();
-        } );          
+          
+          for(var i=0;i<device_category_arr.length;i++){
+  	    	palate_catogories(device_category_arr[i].category_name,i);
+  	      }
+  	    
+  	      for(var i=0;i<device_catlog.length;i++){
+  	    	palate_devices(device_catlog[i].device_category,i);
+  	      }
+  	      
+        } ); 
+        
 </script>
 <style type="text/css">
 .device_img{
@@ -73,89 +83,18 @@
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
 					data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span> <span
+					<span class="sr-only"></span> <span
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="index.html">VORTO Web Modeler</a>
 			</div>
-			<ul class="nav navbar-top-links navbar-right">
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#"> <i class="fa fa-bell fa-fw"></i>
-						<i class="fa fa-caret-down"></i>
-				</a>
-					<ul class="dropdown-menu dropdown-alerts">
-						<li><a href="#">
-								<div>
-									<i class="fa fa-comment fa-fw"></i> Notification <span
-										class="pull-right text-muted small">4 minutes ago</span>
-								</div>
-						</a></li>
-						<li class="divider"></li>
-						<li><a href="#">
-								<div>
-									<i class="fa fa-envelope fa-fw"></i> Alert 01 <span
-										class="pull-right text-muted small">12 minutes ago</span>
-								</div>
-						</a></li>
-						<li class="divider"></li>
-						<li><a href="#">
-								<div>
-									<i class="fa fa-envelope fa-fw"></i> Alert 02 <span
-										class="pull-right text-muted small">13 minutes ago</span>
-								</div>
-						</a></li>
-						<li class="divider"></li>
-						<li><a class="text-center" href="#"> <strong>See
-									All Notifications</strong> <i class="fa fa-angle-right"></i>
-						</a></li>
-					</ul> <!-- /.dropdown-alerts --></li>
-				<!-- /.dropdown -->
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#"> <i class="fa fa-user fa-fw"></i>
-						<i class="fa fa-caret-down"></i>
-				</a>
-					<ul class="dropdown-menu dropdown-user">
-						<li><a href="#"><i class="fa fa-user fa-fw"></i> User
-								Profile</a></li>
-						<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-						</li>
-						<li class="divider"></li>
-						<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>
-								Login</a></li>
-					</ul> <!-- /.dropdown-user --></li>
-				<!-- /.dropdown -->
-			</ul>
 			<!-- /.navbar-top-links -->
 			<div class="navbar-default sidebar" role="navigation">
 				<div class="sidebar-nav navbar-collapse">
 					<ul class="nav" id="side-menu">
-						<li class="sidebar-search">
-							<div class="input-group custom-search-form">
-								<input type="text" class="form-control" placeholder="Search...">
-								<span class="input-group-btn">
-									<button class="btn btn-default" type="button">
-										<i class="fa fa-search"></i>
-									</button>
-								</span>
-							</div> <!-- /input-group -->
-						</li>
 						<li><a href="index.html"><i
 								class="glyphicon glyphicon-th-large"></i> IOT Devices </a></li>
-							<li><a href="#"><i class="glyphicon glyphicon-hdd"></i>
-								Device Category 1 <span class="fa arrow"></span></a>
-								<ul class="nav nav-second-level">
-									<div id="device_cat1" class="devices">
-									</div>
-								</ul>
-							</li>
-							<li><a href="#"><i class="glyphicon glyphicon-hdd"></i>
-								Device Category 2 <span class="fa arrow"></span></a>
-								<ul class="nav nav-second-level">
-									<div id="device_cat2">
-									</div>
-								</ul>
-							</li>
 					</ul>
 				</div>
 				<!-- /.sidebar-collapse -->
@@ -183,12 +122,11 @@
 										Actions <span class="caret"></span>
 									</button>
 									<ul class="dropdown-menu pull-right" role="menu">
-										<li><a href="#">Reset</a></li>
-										<li><a onclick="export_graph(graph)">Export Graph</a></li>
-										<li><a onclick="export_sementic(graph)">Export Logic</a></li>
+										<li><a onclick="reset_graph(graph)">Reset</a></li>
+										<li><a onclick="export_sementic(graph)">Export MetaData</a></li>
 										<li><a data-toggle="modal" href="#myModal">Import</a></li>
 										<li class="divider"></li>
-										<li><a href="#">Save As</a></li>
+										<li><a onclick="export_graph(graph)">Save As</a></li>
 									</ul>
 								</div>
 							</div>
@@ -295,9 +233,13 @@
 		      }
 		    });
 		    
+		   /*  for(var i=0;i<device_category_arr.length;i++){
+		    	palate_catogories(device_category_arr[i].category_name,i);
+		    }
+		    
 		    for(var i=0;i<device_catlog.length;i++){
 		    	palate_devices(device_catlog[i].device_category,i);
-		    }
+		    } */
 		    
 		     $(".device_img").draggable({
 		    	 helper : 'clone',
@@ -305,6 +247,10 @@
 		    		 click_Icon(this.src,this.title,this.value);
 		    	 }
 	        });
+		     $(".device_img").click(function(event, ui){
+		    		 click_Icon(this.src,this.title,this.value);
+		     });
+		     
 		     
 		    
 		    
