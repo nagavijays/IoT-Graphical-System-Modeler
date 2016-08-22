@@ -42,13 +42,12 @@
       <li><a href="#removeDevice" class="cc-active">Remove Device</a></li>
        <li class="separator"></li>
       <li><strong>System API</strong></li>
-      <li><a href="#view_type" class="cc-active">View Type</a></li>
-      <li><a href="#animation_style" class="cc-active">Animation Styles</a></li>
-      <li><a href="#bars_text" class="cc-active">Bars Text</a></li>
-      <li><a href="#vote_counter" class="cc-active">Vote Counter</a></li>
-      <li><a href="#rating_icons" class="cc-active">Rating Icons</a></li>
-      <li><a href="#rating_titles" class="cc-active">Rating Titles</a></li>
-      <li><a href="#bar_colors" class="cc-active">Bar Colors</a></li>
+      <li><a href="#device_palette" class="cc-active">Device palette</a></li>
+      <li><a href="#device_dragdrop" class="cc-active">Device Drag & Drop</a></li>
+      <li><a href="#diagram_modeling" class="cc-active">Diagram modeling</a></li>
+      <li><a href="#diagram_save" class="cc-active">Diagram save</a></li>
+      <li><a href="#diagram_export" class="cc-active">Diagram export metadata</a></li>
+      <li><a href="#diagram_import" class="cc-active">Diagram import</a></li>
     </ul>
     <div class="docs-content">
       <h2> Getting Started</h2>
@@ -127,6 +126,124 @@
       	<p>To remove a device, you had to update the configuration file 
       	excluding that array element and remove the icon image (84px*84px) from the resource
       	folder. </p>
+      <hr>
+      <h2>System API</h2>
+      <h3 id="device_palette">Device Palette</h3>
+      <p> following function generate the pallette view. ( /jointjs/palate.js )</p>
+      		<pre class="prettyprint">
+      function palate_devices(category,i) {		
+		var device_cat  = document.getElementById("device_cat"+category);
+		var nw_elmnt = document.createElement('div');
+			nw_elmnt.setAttribute("class", "col-lg-3 col-md-4 col-xs-6");
+		var device_img = document.createElement('img');	
+			device_img.setAttribute("class","device_img");
+			device_img.setAttribute("src","./resources/"+device_catlog[i].image);
+			device_img.setAttribute("title",device_catlog[i].device);
+			device_img.setAttribute("value",i);
+			nw_elmnt.appendChild(device_img);
+			device_cat.appendChild(nw_elmnt);
+	  }
+	  		</pre>
+	  	<p> following function generate the pallette accordian. ( /jointjs/palate.js )</p>
+	  		<pre class="prettyprint">
+	 function palate_catogories (category_name,i){
+		var side_menu  = document.getElementById("side-menu");
+		var li_elmnt = document.createElement('li');
+		var a_elmnt = document.createElement('a');
+	   		a_elmnt.setAttribute("href", "#");
+		var i_elmnt = document.createElement('i');
+			i_elmnt.setAttribute("class", "glyphicon glyphicon-hdd");
+		var t = document.createTextNode(" "+category_name);
+		var span_elmnt = document.createElement('span');
+	  	    span_elmnt.setAttribute("class", "fa arrow");
+		var ul_elmnt = document.createElement('ul');
+			ul_elmnt.setAttribute("class", "nav nav-second-level");
+		var div_elmnt = document.createElement('div');
+			div_elmnt.setAttribute("id","device_cat"+(i+1));
+		
+			side_menu.appendChild(li_elmnt);
+			li_elmnt.appendChild(a_elmnt);
+			a_elmnt.appendChild(i_elmnt);
+			a_elmnt.appendChild(t);
+			a_elmnt.appendChild(span_elmnt);
+			li_elmnt.appendChild(ul_elmnt);
+			ul_elmnt.appendChild(div_elmnt);
+		}
+	  		</pre>
+      <h3 id="device_dragdrop">Device Drag and Drop</h3>
+      <p>Folowing functions enable the drag&drop and click actions for the canvas. (/index.html)</p>
+      <pre class="prettyprint">
+      $(".device_img").draggable({
+	  	helper : 'clone',
+		stop:function(event, ui){
+			click_Icon(this.src,this.title,this.value);
+	    }
+	  });
+	  $(".device_img").click(function(event, ui){
+		   click_Icon(this.src,this.title,this.value);
+	  });
+      </pre>
+      <h3 id="diagram_modeling">Diagram Modeling</h3>
+      <p>Create new IOT device in canvas. ( /devices/devices.js) 
+      	<pre class="prettyprint">
+      function create_deviceNew(X,Y,W,H,inport,outport,txt,img,graph) {
+		var indx,numberOfInputs,numberOfOutputs;
+		for (var i = 0; i < device_catlog.length; i++) {
+			if(device_catlog[i].device == txt){
+				indx = i;
+				break;
+			}
+		}
+		numberOfInputs = device_catlog[indx].inputs;
+		numberOfOutputs = device_catlog[indx].outputs;
+		var el3 = new joint.shapes.html.Element({ 
+		    position: { x: X, y: Y }, 
+		    size: { width: W, height: H },
+		    inPorts: inputs_ports[numberOfInputs].inputs,
+		    outPorts: outputs_ports[numberOfOutputs].outputs,
+		    textarea: txt,
+		    img_src : img
+		  });
+			graph.addCell(el3);
+	}
+	  		</pre>
+      <h3 id="diagram_save">Diagram Save</h3>
+      <p>This function for save your diagram. ( /jointjs/export.js) 
+      	<pre class="prettyprint">function export_graph(a){
+      	var myWindow = window.open();
+      	myWindow.document.getElementById("jsonExport")
+      		.innerHTML = JSON.stringify(a.toJSON(), undefined, 2);
+        }
+      	</pre>
+      <h3 id="diagram_export">Diagram Export</h3>
+      	<p>Following function export the metadata diagam.</p>
+      	<pre class="prettyprint">
+function export_sementic(a) {
+	var myWindow = window.open();
+	var exp_grp = a.toJSON();
+	exp_grp = JSON.parse(JSON.stringify(exp_grp).split('"textarea":').join('"node":'));
+	for (var i = 0; i < exp_grp.cells.length; i++) {
+		delete exp_grp.cells[i].angle;
+		delete exp_grp.cells[i].position;
+		delete exp_grp.cells[i].size;
+		delete exp_grp.cells[i].img_src;
+		delete exp_grp.cells[i].z;
+		delete exp_grp.cells[i].attrs;
+		delete exp_grp.cells[i].type;
+		delete exp_grp.cells[i].embeds;
+	}
+ myWindow.document.getElementById("jsonExport").innerHTML = JSON.stringify(exp_grp, undefined, 2);
+}
+      	</pre>
+      <h3 id="diagram_import">Diagram Import</h3>
+      <p>Following function import diagam to the canvas.</p>
+      	<pre class="prettyprint">
+      	function import_graph(graph,result) {
+      		graph.clear();
+      		graph.fromJSON(JSON.parse(result));
+      	}
+      	</pre>
+      	
     </div>
   </div>
 </section>
