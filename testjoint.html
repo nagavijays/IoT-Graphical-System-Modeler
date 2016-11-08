@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="bower_components/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="bower_components/metisMenu/dist/metisMenu.min.css"
+	rel="stylesheet">
+<link href="dist/css/sb-admin-2.css" rel="stylesheet">
+<link href="bower_components/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="font/flaticon.css">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+<title>VORTO Web Modeler</title>
+<link rel="stylesheet" type="text/css" href="jointjs/joint.min.css">
+<link rel="stylesheet" type="text/css" href="jointjs/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="jointjs/jointjsStyle.css">
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="jointjs/lodash.min.js"></script>
+<script type="text/javascript" src="jointjs/backbone-min.js"></script>
+<script type="text/javascript" src="jointjs/joint.min.js"></script>
+<script type="text/javascript" src="jointjs/jquery-ui.min.js"></script>
+<script type="text/javascript" src="data/devices.js"></script>
+<script type="text/javascript" src="jointjs/interact.min.js"></script>
+<script type="text/javascript" src="jointjs/export.js"></script>
+<script type="text/javascript">
+//enable draggables to be dropped into this
+interact('.dropzone').dropzone({
+  // only accept elements matching this CSS selector
+  accept: '#yes-drop',
+  // Require a 75% element overlap for a drop to be possible
+  overlap: 0.75,
+
+  // listen for drop related events:
+
+  ondropactivate: function (event) {
+    // add active dropzone feedback
+    event.target.classList.add('drop-active');
+  },
+  ondragenter: function (event) {
+    var draggableElement = event.relatedTarget,
+        dropzoneElement = event.target;
+
+    // feedback the possibility of a drop
+    dropzoneElement.classList.add('drop-target');
+    draggableElement.classList.add('can-drop');
+    draggableElement.textContent = 'Dragged in';
+  },
+  ondragleave: function (event) {
+    // remove the drop feedback style
+    event.target.classList.remove('drop-target');
+    event.relatedTarget.classList.remove('can-drop');
+    event.relatedTarget.textContent = 'Dragged out';
+  },
+  ondrop: function (event) {
+    event.relatedTarget.textContent = 'Dropped';
+  },
+  ondropdeactivate: function (event) {
+    // remove active dropzone feedback
+    event.target.classList.remove('drop-active');
+    event.target.classList.remove('drop-target');
+  }
+});
+</script>
+
+</head>
+<body>
+	<div id="wrapper">
+		<!-- Navigation -->
+		<nav class="navbar navbar-default navbar-static-top" role="navigation"
+			style="margin-bottom: 0">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html">VORTO Web Modeler</a>
+			</div>
+			<ul class="nav navbar-top-links navbar-right">
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#"> <i class="fa fa-bell fa-fw"></i>
+						<i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-alerts">
+						<li><a href="#">
+								<div>
+									<i class="fa fa-comment fa-fw"></i> Notification <span
+										class="pull-right text-muted small">4 minutes ago</span>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<i class="fa fa-envelope fa-fw"></i> Alert 01 <span
+										class="pull-right text-muted small">12 minutes ago</span>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<i class="fa fa-envelope fa-fw"></i> Alert 02 <span
+										class="pull-right text-muted small">13 minutes ago</span>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a class="text-center" href="#"> <strong>See
+									All Notifications</strong> <i class="fa fa-angle-right"></i>
+						</a></li>
+					</ul> <!-- /.dropdown-alerts --></li>
+				<!-- /.dropdown -->
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#"> <i class="fa fa-user fa-fw"></i>
+						<i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-user">
+						<li><a href="#"><i class="fa fa-user fa-fw"></i> User
+								Profile</a></li>
+						<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+						</li>
+						<li class="divider"></li>
+						<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>
+								Login</a></li>
+					</ul> <!-- /.dropdown-user --></li>
+				<!-- /.dropdown -->
+			</ul>
+			<!-- /.navbar-top-links -->
+
+			<div class="navbar-default sidebar" role="navigation">
+				<div class="sidebar-nav navbar-collapse">
+					<ul class="nav" id="side-menu">
+						<li class="sidebar-search">
+							<div class="input-group custom-search-form">
+								<input type="text" class="form-control" placeholder="Search...">
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button">
+										<i class="fa fa-search"></i>
+									</button>
+								</span>
+							</div> <!-- /input-group -->
+						</li>
+						<li><a href="index.html"><i
+								class="glyphicon glyphicon-th-large"></i> IOT Devices </a></li>
+						<li><a href="#"><i class="glyphicon glyphicon-hdd"></i>
+								Device Category 1 <span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<table class='table table-bordered'>
+									<tbody>
+										<tr>
+											<td><i id="ss" class="glyph-icon flaticon-cable"
+												draggable="true" ondragleave="dragleave(event)"></i></td>
+											<td><i class="glyph-icon flaticon-charger"
+												draggable="true" ondragstart="drag(event)"></i></td>
+											<td><i class="glyph-icon flaticon-charger-1"
+												draggable="true" ondragstart="drag(event)"></i></td>
+										</tr>
+										<tr>
+											<td><i class="glyph-icon flaticon-chip" draggable="true"></i></td>
+											<td><i class="glyph-icon flaticon-chip-1"
+												draggable="true"></i></td>
+											<td><i class="glyph-icon flaticon-charger-2"
+												draggable="true"></i></td>
+										</tr>
+										<tr>
+											<td><i class="glyph-icon flaticon-computer"
+												draggable="true"></i></td>
+											<td><i class="glyph-icon flaticon-cooler"
+												draggable="true"></i></td>
+											<td><i class="glyph-icon flaticon-copy-machine"
+												draggable="true"></i></td>
+										</tr>
+										<tr>
+											<td><i class="glyph-icon flaticon-earphones"
+												draggable="true"></i></td>
+											<td><i class="glyph-icon flaticon-ethernet"
+												draggable="true"></i></td>
+											<td><i class="glyph-icon flaticon-game-console"
+												draggable="true"></i></td>
+										</tr>
+										<tr>
+											<td><i class="glyph-icon flaticon-game-console-1"
+												draggable="true"></i></td>
+											<td><i class="glyph-icon flaticon-game-controller-1"
+												draggable="true"></i></td>
+											<td><i class="glyph-icon flaticon-hdmi" draggable="true"></i></td>
+										</tr>
+									</tbody>
+								</table>
+							</ul></li>
+					</ul>
+				</div>
+				<!-- /.sidebar-collapse -->
+			</div>
+			<!-- /.navbar-static-side -->
+		</nav>
+
+		<div id="page-wrapper">
+
+			<!-- /.row -->
+			<div class="row">
+				<br></br>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<i class="glyphicon glyphicon-th-large"></i> Visual Modeling
+							Dashboard
+							<div class="pull-right">
+								<div class="btn-group">
+									<button type="button"
+										class="btn btn-default btn-xs dropdown-toggle"
+										data-toggle="dropdown">
+										Actions <span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu pull-right" role="menu">
+										<li><a href="#">Reset</a></li>
+										<li><a onclick="export_graph(graph)">Export</a></li>
+										<li><a href="#">Import</a></li>
+										<li class="divider"></li>
+										<li><a href="#">Save As</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="panel-body">
+							<div id="paper"></div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /#page-wrapper -->
+
+	</div>
+	<script type="text/javascript">
+
+	 var graph = new joint.dia.Graph;
+
+	    var paper = new joint.dia.Paper({
+	        el: $('#paper'),
+	        width: 1500,
+	        height: 700,
+	        model: graph
+	    });
+
+	graph.addCells([el1, el2]);
+	
+    </script>
+
+
+	<!-- Bootstrap Core JavaScript -->
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+	<!-- Metis Menu Plugin JavaScript -->
+	<script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+	<!-- Morris Charts JavaScript -->
+	<script src="bower_components/raphael/raphael-min.js"></script>
+
+	<!-- Custom Theme JavaScript -->
+	<script src="dist/js/sb-admin-2.js"></script>
+	<script>
+		  $(function() {
+			
+		    $( "#draggable" ).droppable({
+		      drop: function( event, ui ) {
+		        console.log("dropped");
+		      }
+		    });
+		  });
+	</script>
+
+</body>
+
+</html>
