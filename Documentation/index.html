@@ -1,0 +1,265 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>IoT-Graphical-System-Modeler</title>
+<link rel="alternate" type="application/rss+xml" title="frittt.com" href="feed/index.html">
+<link href="http://fonts.googleapis.com/css?family=Raleway:700,300" rel="stylesheet"
+        type="text/css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/prettify.css">
+</head>
+<body>
+<div class="wrapper">
+<nav>
+ 
+  	<div class="pull-left">
+    	<h1><a href="../index.html"><span>VORTO : IoT-Graphical-System-Modeler</span></a></h1>
+    </div>
+</nav>
+<header>
+  <div class="container">
+    <h2 class="lone-header">Software Documentation : IoT-Graphical-System-Modeler</h2>
+  </div>
+</header>
+<section>
+  <div class="container">
+    <ul class="docs-nav">
+      <li><strong>Getting Started</strong></li>
+      <li><a href="#welcome" class="cc-active">Welcome</a></li>
+      <li><a href="#about" class="cc-active">About</a></li>
+      <li><a href="#usecase" class="cc-active">Usecase</a></li>
+      <li><a href="#license" class="cc-active">License</a></li>
+      <li class="separator"></li>
+      <li><strong>Developer Guide</strong></li>
+      <li><a href="#installation" class="cc-active">Installation </a></li>
+      <li><a href="#configuration" class="cc-active">Configurations</a></li>
+      <li><a href="#addNewDevice" class="cc-active">Add New Device</a></li>
+      <li><a href="#removeDevice" class="cc-active">Remove Device</a></li>
+       <li class="separator"></li>
+      <li><strong>System API</strong></li>
+      <li><a href="#device_palette" class="cc-active">Device palette</a></li>
+      <li><a href="#device_dragdrop" class="cc-active">Device Drag & Drop</a></li>
+      <li><a href="#diagram_modeling" class="cc-active">Diagram modeling</a></li>
+      <li><a href="#diagram_save" class="cc-active">Diagram save</a></li>
+      <li><a href="#diagram_export" class="cc-active">Diagram export metadata</a></li>
+      <li><a href="#diagram_import" class="cc-active">Diagram import</a></li>
+    </ul>
+    <div class="docs-content">
+      <h2> Getting Started</h2>
+      <h3 id="welcome"> Welcome</h3>
+      <p> Welcome to VORTO IOT-Device-modeler, This application will 
+      facilitate to you to diagrammatically plan IOT models for your requirements.</p>  
+      <ul>
+        <li>Use Vorto IOT repository for IOT models </li>
+        <li>Plan new IOT models</li>
+        <li>Export and Import IOT models</li>
+        <li>Customize IOT models</li>
+      </ul>
+      <h3 id="about"> About</h3>
+      	<p>
+      		Project name : VORTO Iot-Device modeler <br/>
+			Project details : Google summer of code 2016 project under the Eclipse Foundation.<br/>
+			Implemented by : Tharindu Madushanka Peiris (Linkedin : )<br/>
+			Mentored by : </br>
+      	</p>
+      <h3 id="usecase"> Usecase</h3>
+      
+      <h3 id="license"> License</h3>
+      <p> Opensource project. Source code available on :<a href="https://github.com/nagavijays/IoT-Graphical-System-Modeler">github</a> </p>
+      <hr>
+      <h2>Developer Guide</h2>
+      <h3 id="installation"> Installation  </h3>
+      <p> System implementation minimized the requested system specifications and it's a 
+      low weight portable system. This system doesn't request any pre installation. It will more compatible 
+      with servers but you can run it with your personal computers. Download or fork the github repository 
+      and open index.html file using your modern browser.</p>
+      <p><strong>Note : </strong>In the application deployment request a chrome/firfox or any other modern 
+      web browser with HTML5 compatibility.  </p>
+      <p>github repository : <a href="https://github.com/nagavijays/IoT-Graphical-System-Modeler">github</a></p>
+      <h3 id="configuration"> Configuration  </h3>
+      <p>System configuration file : resources/device_mapping.js </p>
+      <ul>
+      	<li>device catalog - All the details about the device</li>
+      	<pre class="prettyprint">var device_catlog = [
+       {device_category:1, device:"Accelerometer", image:"Accelerometer.png",inputs:0,outputs:1},
+       {device_category:1, device:"Barometer", image:"barometer.png",inputs:1,outputs:2},
+       ......
+       ......
+	  	</pre>
+	  	<p> Input parameter represent the index of input array including number of inputs.
+	  	Output parameter represent the index of output array including number of outputs. </p>
+	  	<li>Device category array - All the details about device category.</li>
+      	<pre class="prettyprint">var device_category_arr = [
+      	{device_category:1, category_name:"Measuring equipments"},
+      	{device_category:2, category_name:"Lighting Equipment"}
+        ......
+        ......
+	  	</pre>
+	  	<li>Device input array - Device input configurations.</li>
+      	<pre class="prettyprint">var inputs_ports =[
+      	{inputs:[] },
+      	{inputs:['in'] },
+      	{inputs:['in','in1'] },
+        ......
+        ......
+	  	</pre>
+	  	<li>Device output array - Device output configurations.</li>
+      	<pre class="prettyprint">var outputs_ports =[
+      	{outputs:[] },
+      	{outputs:['out'] },
+      	{outputs:['out','out1'] },
+        ......
+        ......
+	  	</pre>
+      </ul>
+       
+      <h3 id="addNewDevice"> Add New Device  </h3>
+      	<p>To add new device, you had to update the configuration file 
+      	including a new element to the "device_catlog" array and add icon image (84px*84px)to the resource
+      	folder. </p>
+      <h3 id="removeDevice"> Remove Device  </h3>
+      	<p>To remove a device, you had to update the configuration file 
+      	excluding that array element and remove the icon image (84px*84px) from the resource
+      	folder. </p>
+      <hr>
+      <h2>System API</h2>
+      <h3 id="device_palette">Device Palette</h3>
+      <p> following function generate the pallette view. ( /jointjs/palate.js )</p>
+      		<pre class="prettyprint">
+      function palate_devices(category,i) {		
+		var device_cat  = document.getElementById("device_cat"+category);
+		var nw_elmnt = document.createElement('div');
+			nw_elmnt.setAttribute("class", "col-lg-3 col-md-4 col-xs-6");
+		var device_img = document.createElement('img');	
+			device_img.setAttribute("class","device_img");
+			device_img.setAttribute("src","./resources/"+device_catlog[i].image);
+			device_img.setAttribute("title",device_catlog[i].device);
+			device_img.setAttribute("value",i);
+			nw_elmnt.appendChild(device_img);
+			device_cat.appendChild(nw_elmnt);
+	  }
+	  		</pre>
+	  	<p> following function generate the pallette accordian. ( /jointjs/palate.js )</p>
+	  		<pre class="prettyprint">
+	 function palate_catogories (category_name,i){
+		var side_menu  = document.getElementById("side-menu");
+		var li_elmnt = document.createElement('li');
+		var a_elmnt = document.createElement('a');
+	   		a_elmnt.setAttribute("href", "#");
+		var i_elmnt = document.createElement('i');
+			i_elmnt.setAttribute("class", "glyphicon glyphicon-hdd");
+		var t = document.createTextNode(" "+category_name);
+		var span_elmnt = document.createElement('span');
+	  	    span_elmnt.setAttribute("class", "fa arrow");
+		var ul_elmnt = document.createElement('ul');
+			ul_elmnt.setAttribute("class", "nav nav-second-level");
+		var div_elmnt = document.createElement('div');
+			div_elmnt.setAttribute("id","device_cat"+(i+1));
+		
+			side_menu.appendChild(li_elmnt);
+			li_elmnt.appendChild(a_elmnt);
+			a_elmnt.appendChild(i_elmnt);
+			a_elmnt.appendChild(t);
+			a_elmnt.appendChild(span_elmnt);
+			li_elmnt.appendChild(ul_elmnt);
+			ul_elmnt.appendChild(div_elmnt);
+		}
+	  		</pre>
+      <h3 id="device_dragdrop">Device Drag and Drop</h3>
+      <p>Folowing functions enable the drag&drop and click actions for the canvas. (/index.html)</p>
+      <pre class="prettyprint">
+      $(".device_img").draggable({
+	  	helper : 'clone',
+		stop:function(event, ui){
+			click_Icon(this.src,this.title,this.value);
+	    }
+	  });
+	  $(".device_img").click(function(event, ui){
+		   click_Icon(this.src,this.title,this.value);
+	  });
+      </pre>
+      <h3 id="diagram_modeling">Diagram Modeling</h3>
+      <p>Create new IOT device in canvas. ( /devices/devices.js) 
+      	<pre class="prettyprint">
+      function create_deviceNew(X,Y,W,H,inport,outport,txt,img,graph) {
+		var indx,numberOfInputs,numberOfOutputs;
+		for (var i = 0; i < device_catlog.length; i++) {
+			if(device_catlog[i].device == txt){
+				indx = i;
+				break;
+			}
+		}
+		numberOfInputs = device_catlog[indx].inputs;
+		numberOfOutputs = device_catlog[indx].outputs;
+		var el3 = new joint.shapes.html.Element({ 
+		    position: { x: X, y: Y }, 
+		    size: { width: W, height: H },
+		    inPorts: inputs_ports[numberOfInputs].inputs,
+		    outPorts: outputs_ports[numberOfOutputs].outputs,
+		    textarea: txt,
+		    img_src : img
+		  });
+			graph.addCell(el3);
+	}
+	  		</pre>
+      <h3 id="diagram_save">Diagram Save</h3>
+      <p>This function for save your diagram. ( /jointjs/export.js) 
+      	<pre class="prettyprint">function export_graph(a){
+      	var myWindow = window.open();
+      	myWindow.document.getElementById("jsonExport")
+      		.innerHTML = JSON.stringify(a.toJSON(), undefined, 2);
+        }
+      	</pre>
+      <h3 id="diagram_export">Diagram Export</h3>
+      	<p>Following function export the metadata diagam.</p>
+      	<pre class="prettyprint">
+function export_sementic(a) {
+	var myWindow = window.open();
+	var exp_grp = a.toJSON();
+	exp_grp = JSON.parse(JSON.stringify(exp_grp).split('"textarea":').join('"node":'));
+	for (var i = 0; i < exp_grp.cells.length; i++) {
+		delete exp_grp.cells[i].angle;
+		delete exp_grp.cells[i].position;
+		delete exp_grp.cells[i].size;
+		delete exp_grp.cells[i].img_src;
+		delete exp_grp.cells[i].z;
+		delete exp_grp.cells[i].attrs;
+		delete exp_grp.cells[i].type;
+		delete exp_grp.cells[i].embeds;
+	}
+ myWindow.document.getElementById("jsonExport").innerHTML = JSON.stringify(exp_grp, undefined, 2);
+}
+      	</pre>
+      <h3 id="diagram_import">Diagram Import</h3>
+      <p>Following function import diagam to the canvas.</p>
+      	<pre class="prettyprint">
+      	function import_graph(graph,result) {
+      		graph.clear();
+      		graph.fromJSON(JSON.parse(result));
+      	}
+      	</pre>
+      	
+    </div>
+  </div>
+</section>
+<section class="vibrant centered">
+  <div class="">
+  </div>
+</section>
+<footer>
+  <div class="">
+    <p>Google Summer Of Code 2016 - Eclipse Foundation.</p>
+  </div>
+</footer>
+</div>
+<script src="js/jquery.min.js"></script> 
+<script type="text/javascript" src="js/prettify/prettify.js"></script> 
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script>
+<script src="js/layout.js"></script>
+</body>
+</html>
