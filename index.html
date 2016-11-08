@@ -45,20 +45,20 @@
         	var X = Math.floor((Math.random() * 800) + 50);
         	var Y = Math.floor((Math.random() * 300) + 50);
         	create_deviceNew(X,Y,80,80,inport,outport,title,src,graph);
-        } 
+        }
         $( function() {
           $( "#dialog" ).dialog();
-          
+
           for(var i=0;i<device_category_arr.length;i++){
   	    	palate_catogories(device_category_arr[i].category_name,i);
   	      }
-  	    
+
   	      for(var i=0;i<device_catlog.length;i++){
   	    	palate_devices(device_catlog[i].device_category,i);
   	      }
-  	      
-        } ); 
-        
+
+        } );
+
 </script>
 <style type="text/css">
 .device_img{
@@ -67,7 +67,7 @@
     padding-top: 5px;
     padding-bottom: 5px;
     padding-right: 5px;
-    padding-left: 5px;  
+    padding-left: 5px;
 }
 .html-element{
 	position: absolute;
@@ -91,7 +91,7 @@
 			</div>
 			<ul class="nav navbar-top-links navbar-right">
 				<li class="dropdown">
-					<a class="dropdown-toggle" href="./Documentation/index.html">
+					<a class="dropdown-toggle" href="./docs/index.html">
 						Documentation
 					</a>
 					</li>
@@ -110,7 +110,7 @@
 		</nav>
 
 		<div id="page-wrapper">
-			
+
 			<!-- /.row -->
 			<div class="row">
 				<br></br>
@@ -155,7 +155,7 @@
 		  <!-- Modal -->
 		  <div class="modal fade" id="myModal" role="dialog">
 		    <div class="modal-dialog">
-		    
+
 		      <!-- Modal content-->
 		      <div class="modal-content">
 		        <div class="modal-header">
@@ -173,10 +173,10 @@
 		    </div>
 		  </div>
 	</div>
-	
-	
+
+
 	<script type="text/javascript">
-	
+
 	 var graph = new joint.dia.Graph;
 
 	    var paper = new joint.dia.Paper({
@@ -191,7 +191,7 @@
 	                 ] */
 	        }),
 	    });
-	    
+
 		window.onload = function() {
 			var fileInput = document.getElementById('fileInput');
 			var fileDisplayArea ;
@@ -209,15 +209,15 @@
 						import_graph(graph,reader.result)
 					}
 
-					reader.readAsText(file);	
+					reader.readAsText(file);
 				} else {
 					//fileDisplayArea.innerText = "File not supported!"
 					console.log("File not supported!");
 				}
 			});
 	}
-	
-	
+
+
     </script>
 
 
@@ -239,15 +239,15 @@
 		        console.log("dropped");
 		      }
 		    });
-		    
+
 		   /*  for(var i=0;i<device_category_arr.length;i++){
 		    	palate_catogories(device_category_arr[i].category_name,i);
 		    }
-		    
+
 		    for(var i=0;i<device_catlog.length;i++){
 		    	palate_devices(device_catlog[i].device_category,i);
 		    } */
-		    
+
 		     $(".device_img").draggable({
 		    	 helper : 'clone',
 		    	 stop:function(event, ui){
@@ -257,10 +257,10 @@
 		     $(".device_img").click(function(event, ui){
 		    		 click_Icon(this.src,this.title,this.value);
 		     });
-		     
-		     
-		    
-		    
+
+
+
+
 		  });
 	</script>
 
